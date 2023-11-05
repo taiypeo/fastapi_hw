@@ -53,7 +53,10 @@ def post():
 
 
 @app.get("/dog")
-def get_dogs(kind: DogType):
+def get_dogs(kind: DogType | None = None):
+    if kind is None:
+        return [dog for dog in dogs_db.values()]
+    
     return [dog for dog in dogs_db.values() if dog.kind == kind]
 
 
